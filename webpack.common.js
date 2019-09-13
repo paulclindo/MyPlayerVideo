@@ -1,51 +1,54 @@
-const path = require('path');
+const path = require("path");
 module.exports = {
   entry: {
     // vendor: ['jquery', 'bootstrap'],
-    home: "./src/home.js",
-    
+    home: path.resolve(__dirname, "src/entries/home.js")
   },
   // devtool: "source-map",
   devServer: {
-    host: '0.0.0.0', //your ip address
-    port: 8080,
+    host: "0.0.0.0", //your ip address
+    port: 8080
   },
   optimization: {
     splitChunks: {
       cacheGroups: {
         vendor: {
-          chunks: 'initial',
-          name: 'vendor',
-          test: 'vendor',
+          chunks: "initial",
+          name: "vendor",
+          test: "vendor",
           enforce: true
         }
       }
     }
   },
   module: {
-    rules: [{
+    rules: [
+      {
         test: /\.html$/,
-        use: ['html-loader']
+        use: ["html-loader"]
       },
       {
         test: /\.(svg|png|jpg|ico|gif)$/,
         use: {
-          loader: "file-loader",
+          loader: "url-loader",
           options: {
             name: "[name].[hash].[ext]",
-            outputPath: 'images'
+            outputPath: "images"
           }
         }
       },
       {
         test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
-        use: [{
-          loader: 'file-loader',
-          options: {
-            name: '[name].[ext]',
-            outputPath: 'fonts/'
+        use: [
+          {
+            loader: "url-loader",
+            options: {
+              limit: 1000,
+              name: "[name].[ext]",
+              outputPath: "fonts/"
+            }
           }
-        }]
+        ]
       },
       {
         test: /\.(js|jsx)$/,
@@ -57,20 +60,18 @@ module.exports = {
       {
         test: /\.(mp4|webm)$/,
         use: {
-          loader: 'url-loader',
+          loader: "url-loader",
           options: {
             limit: 1000,
-            name: 'videos/[name].[ext]'
+            name: "videos/[name].[ext]"
           }
         }
-      },
-      
+      }
+
       // {
       //   test: require.resolve('jquery'),
       //   loader: 'expose?jQuery!expose?$'
       // }
     ]
-  },
-
-
-}
+  }
+};

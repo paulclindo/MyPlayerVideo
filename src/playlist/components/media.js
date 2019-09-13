@@ -1,20 +1,15 @@
-import React, { Component } from 'react'
-import './media.scss'
-class Media extends Component{
-  
-    state = {
-      author: 'Payl',
-      title: 'Trying React'
-    }
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import "./media.scss";
+class Media extends Component {
+  state = {
+    author: "Paul"
+  };
 
   handleClick = e => {
-    // console.log(this.props.title)
-    this.setState ({
-      author: 'Brayan',
-      title: 'Hola react'
-    })
-  }
-  render(){
+    this.props.openModal(this.props);
+  };
+  render() {
     // const styles = {
     //   container: {
     //     color: '#44546b',
@@ -24,22 +19,29 @@ class Media extends Component{
     //   }
     // }
 
-
-    return(
-      <div className="Media" onClick={this.handleClick} >
+    return (
+      <div className="Media" onClick={this.handleClick}>
         <div className="Media-cover">
-          <img 
+          <img
             className="Media-image"
-            src={this.props.image} 
+            src={this.props.cover}
             alt=""
             width={260}
-            height={160}/>
-            <h3 className="Media-title">{this.state.title}</h3>
-            <p className="Media-author">{this.state.author}</p>
+            height={160}
+          />
+          <h3 className="Media-title">{this.props.title}</h3>
+          <p className="Media-author">{this.props.author}</p>
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default Media
+Media.PropTypes = {
+  cover: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  author: PropTypes.string,
+  type: PropTypes.oneOf(["video", "audio"])
+};
+
+export default Media;

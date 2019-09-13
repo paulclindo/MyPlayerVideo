@@ -21,6 +21,8 @@ module.exports = merge(common, {
     }),
     
   ],
+  devtool: 'eval-source-map',
+
   module: {
     rules: [{
         // test: /\.scss$/,
