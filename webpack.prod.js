@@ -23,7 +23,7 @@ module.exports = merge(common, {
     }),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      template: "./src/template/home.html",
+      template: "./public/home.html",
       filename: "index.html",
       minify: {
         removeAttributeQuotes: true,

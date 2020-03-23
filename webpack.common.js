@@ -67,11 +67,6 @@ module.exports = {
           }
         }
       }
-
-      // {
-      //   test: require.resolve('jquery'),
-      //   loader: 'expose?jQuery!expose?$'
-      // }
     ]
   }
 };

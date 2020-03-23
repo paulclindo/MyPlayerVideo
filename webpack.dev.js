@@ -15,25 +15,25 @@ module.exports = merge(common, {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./src/template/home.html",
+      template: "./public/home.html",
       filename: "index.html",
       chunks: ['home']
     }),
-    
+
   ],
   devtool: 'eval-source-map',
 
   module: {
     rules: [{
-        // test: /\.scss$/,
-        test: /\.s?css$/,
-        use: [
-          'style-loader', //3.make styles inject into DOM
-          'css-loader', //2.Turns css into common js
-          // 'sass-loader' //1.Turns sass into css
-          'sass-loader'
-        ]
-      },
+      // test: /\.scss$/,
+      test: /\.s?css$/,
+      use: [
+        'style-loader', //3.make styles inject into DOM
+        'css-loader', //2.Turns css into common js
+        // 'sass-loader' //1.Turns sass into css
+        'sass-loader'
+      ]
+    },
     ]
   }
 });
