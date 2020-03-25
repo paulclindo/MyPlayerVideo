@@ -1,0 +1,19 @@
+[options]
+esproposal.decorators=ignore
+
+suppress_comment= \\(.\\|\n\\)*\\$FlowFixMe
+
+module.name_mapper='.*/blockchain/build/contracts/.*\.json' -> '<PROJECT_ROOT>/flow/mappers/contract-artifact.json.flow'
+
+[ignore]
+<PROJECT_ROOT>/dist/.*
+<PROJECT_ROOT>/node_modules/oboe/test/json/incomplete.json
+
+[untyped]
+.*/blockchain/build/contracts/.*\.json
+
+[libs]
+flow/declarations/
+
+[include]
+../service/API.js

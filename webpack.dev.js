@@ -1,39 +1,37 @@
 const path = require('path');
-const common = require('./webpack.common')
-const merge = require('webpack-merge')
-var webpack = require("webpack");
+const merge = require('webpack-merge');
+const webpack = require('webpack');
 
-var HtmlWebpackPlugin = require('html-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const common = require('./webpack.common');
 
-
-var HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = merge(common, {
-  mode: "development",
+  mode: 'development',
   output: {
-    filename: "[name].bundle.js",
-    path: path.resolve(__dirname, "dev")
+    filename: '[name].bundle.js',
+    path: path.resolve(__dirname, 'dev'),
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./public/home.html",
-      filename: "index.html",
-      chunks: ['home']
+      template: './public/home.html',
+      filename: 'index.html',
+      chunks: ['home'],
     }),
-
   ],
   devtool: 'eval-source-map',
 
   module: {
-    rules: [{
-      // test: /\.scss$/,
-      test: /\.s?css$/,
-      use: [
-        'style-loader', //3.make styles inject into DOM
-        'css-loader', //2.Turns css into common js
-        // 'sass-loader' //1.Turns sass into css
-        'sass-loader'
-      ]
-    },
-    ]
-  }
+    rules: [
+      {
+        // test: /\.scss$/,
+        test: /\.s?css$/,
+        use: [
+          'style-loader', // 3.make styles inject into DOM
+          'css-loader', // 2.Turns css into common js
+          // 'sass-loader' //1.Turns sass into css
+          'sass-loader',
+        ],
+      },
+    ],
+  },
 });
