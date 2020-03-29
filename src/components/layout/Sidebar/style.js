@@ -2,39 +2,50 @@ import styled from 'styled-components';
 
 export const SidebarWrapper = styled.div`
   width: 320px;
-  background: var(--ligthterbrown-color);
+  background: ${props => props.theme.colors.red};
   position: fixed;
   text-align: center;
   height: 100%;
-  .logo {
-    margin-top: 2rem;
-    color: var(--accent-color);
-    font-weight: 500;
-    letter-spacing: 2.5px;
+`;
+export const HeaderLogo = styled.div`
+  svg {
+    /* margin-right: 40px; */
   }
-  .nav {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-top: 2rem;
-    margin-left: 2rem;
-    padding: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 4rem;
+  margin-top: 2rem;
+  color: ${props => props.theme.colors.white};
+  font-weight: 500;
+  letter-spacing: 2.5px;
+`;
+export const Nav = styled.nav`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 2rem;
+  margin-left: 2rem;
+  padding: 0;
+  svg {
+    margin-right: 1rem;
   }
-
-  .nav li {
+  li {
     text-align: left;
     list-style: none;
     padding: 1rem 1.5rem;
   }
-  .nav li a {
+  li a {
     position: relative;
     text-decoration: none;
-    color: var(--dark-color);
+    color: ${props => props.theme.colors.white};
     text-transform: uppercase;
     letter-spacing: 1px;
     font-size: 0.8rem;
+    display: flex;
+    align-items: center;
   }
-  .nav li a:after {
+  li a:after {
     content: '';
     position: absolute;
     bottom: -10px;
@@ -42,12 +53,12 @@ export const SidebarWrapper = styled.div`
     width: 0%;
     height: 5px;
     transition: all 1s;
-    background-color: var(--primary-color);
+    background-color: ${props => props.theme.colors.primary};
   }
-  .nav li a:hover:after {
+  li a:hover:after {
     width: 100%;
   }
-  .nav li a:hover {
-    color: var(--primary-color);
+  li a:hover {
+    color: ${props => props.theme.colors.primary};
   }
 `;

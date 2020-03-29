@@ -1,38 +1,77 @@
 import React from 'react';
-import { SidebarWrapper } from './style';
+import {
+  IoMdHome,
+  IoIosTrendingUp,
+  IoIosHeart,
+  IoMdListBox,
+  IoIosRefresh,
+  IoIosTimer,
+  IoIosThumbsUp,
+  IoIosMenu,
+} from 'react-icons/io';
+import { styled } from 'styled-components';
+import { SidebarWrapper, Nav, HeaderLogo } from './style';
 
 export default function Sidebar(props) {
+  const [collapsed, setCollapsed] = React.useState(false);
+
   return (
-    <SidebarWrapper>
-      <div className="logo">
+    <SidebarWrapper style={{ width: collapsed ? '100px' : 'auto' }}>
+      <HeaderLogo>
+        <div>
+          <IoIosMenu onClick={() => setCollapsed(!collapsed)} size={30} />
+        </div>
         <p>🚀 pcYoutube</p>
-      </div>
-      <ul className="nav">
+      </HeaderLogo>
+      <Nav>
         <li>
-          <a href="">Home</a>
+          <a href="#">
+            <IoMdHome size={25} /> Home
+          </a>
         </li>
         <li>
-          <a href="">Trending</a>
+          <a href="#">
+            <IoIosTrendingUp size={25} />
+            Trending
+          </a>
         </li>
         <li>
-          <a href="">Suscriptions</a>
+          <a href="#">
+            <IoIosHeart size={25} />
+            Suscriptions
+          </a>
         </li>
         <li>
-          <a href="">Library</a>
+          <a href="#">
+            <IoMdListBox size={25} />
+            Library
+          </a>
         </li>
         <li>
-          <a href="">History</a>
+          <a href="#">
+            <IoIosRefresh size={25} />
+            History
+          </a>
         </li>
         <li>
-          <a href="">Your Videos</a>
+          <a href="#">
+            <IoMdHome size={25} />
+            Your Videos
+          </a>
         </li>
         <li>
-          <a href="">Watch Later</a>
+          <a href="#">
+            <IoIosTimer size={25} />
+            Watch Later
+          </a>
         </li>
         <li>
-          <a href="">Liked Videos</a>
+          <a href="#">
+            <IoIosThumbsUp size={25} />
+            Liked Videos
+          </a>
         </li>
-      </ul>
+      </Nav>
     </SidebarWrapper>
   );
 }

@@ -1,6 +1,7 @@
 import React from 'react';
-import Playlist from '../../playlist/components/playlist';
+// import Playlist from '../../playlist/components/playlist';
 import { CategoryWrapper, Title, Description } from './style';
+import ListVideoCards from '../ListVideoCards';
 
 type Props = {|
   description: string,
@@ -15,7 +16,7 @@ export default function Category(props: Props) {
     <CategoryWrapper>
       <Title>{title}</Title>
       <Description>{description}</Description>
-      <Playlist handleOpenModal={handleOpenModal} playlist={playlist} />
+      <ListVideoCards handleOpenModal={handleOpenModal} playlist={playlist} />
     </CategoryWrapper>
   );
 }

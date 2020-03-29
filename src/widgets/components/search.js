@@ -1,26 +1,27 @@
-import React from 'react'
-import './search.css'
+import React from 'react';
+import './search.css';
 
+type Props = {|
+  handleSubmit: Function,
+  handleChange: Function,
+  setRef: Function,
+  value: any,
+|};
 
-// function Search (props){
-//   return(
-//     <form action=""></form>
-//   )
-// }
+const Search = (props: Props) => {
+  const { handleSubmit, handleChange, setRef, value } = props;
+  return (
+    <form onSubmit={handleSubmit} className="Search">
+      <input
+        ref={setRef}
+        type="text"
+        className="Search-input"
+        placeholder="Look for your favorite video ..."
+        onChange={handleChange}
+        value={value}
+      />
+    </form>
+  );
+};
 
-const Search = (props) => (
-  <form 
-    onSubmit={props.handleSubmit}
-    className="Search" >
-    <input 
-      ref={props.setRef}
-      type="text"
-      className="Search-input"
-      placeholder="Busca tu video favorito ..."
-      onChange= {props.handleChange}
-      value={props.value}
-    />
-  </form>
-)
-
-export default Search
+export default Search;
