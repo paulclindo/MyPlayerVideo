@@ -1,5 +1,5 @@
-import React from 'react';
-import Icon from './icon';
+import React from "react";
+import Icon from "./Icon";
 
 function PauseIcon(props) {
   return (
