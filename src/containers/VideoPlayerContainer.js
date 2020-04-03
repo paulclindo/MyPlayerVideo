@@ -1,20 +1,20 @@
-import React, { Component } from 'react';
-import VideoPlayerLayout from '../components/player/VideoPlayerLayout';
-import Video from '../components/player/Video';
-import Title from '../components/player/Title';
-import PlayPause from '../components/player/PlayPause';
-import Timer from '../components/player/Timer';
-import VideoPlayerControl from '../components/player/VideoPlayerControl';
-import ProgressBar from '../components/player/ProgressBar';
-import Spinner from '../components/player/Spinner';
-import Volume from '../components/player/Volume';
-import FullScreen from '../components/player/FullScreen';
-import formattedTime from '../utilities/formattedTime';
+import React, { Component } from "react";
+import VideoPlayerLayout from "../components/player/VideoPlayerLayout";
+import Video from "../components/player/Video";
+import Title from "../components/player/Title";
+import PlayPause from "../components/player/PlayPause";
+import Timer from "../components/player/Timer";
+import VideoPlayerControl from "../components/player/VideoPlayerControl";
+import ProgressBar from "../components/player/ProgressBar";
+import Spinner from "../components/player/Spinner";
+import Volume from "../components/player/Volume";
+import FullScreen from "../components/player/FullScreen";
+import formattedTime from "../utilities/formattedTime";
 
 type Props = {|
   title: string,
   autoplay: boolean,
-  src: string,
+  src: string
 |};
 
 class VideoPlayerContainer extends Component<Props> {
@@ -23,37 +23,37 @@ class VideoPlayerContainer extends Component<Props> {
     duration: 0,
     currentTime: 0,
     loading: false,
-    muted: 0,
+    muted: false
   };
 
   componentDidMount() {
     this.setState({
-      pause: !this.props.autoplay,
+      pause: !this.props.autoplay
     });
   }
 
   togglePlay = () => {
     this.setState({
-      pause: !this.state.pause,
+      pause: !this.state.pause
     });
   };
 
   toggleMuted = () => {
     this.setState({
-      muted: !this.state.muted,
+      muted: !this.state.muted
     });
   };
 
   handleLoadedMetada = e => {
     this.video = e.target;
     this.setState({
-      duration: this.video.duration,
+      duration: this.video.duration
     });
   };
 
   handleTimeUpdate = () => {
     this.setState({
-      currentTime: this.video.currentTime,
+      currentTime: this.video.currentTime
     });
   };
 
@@ -64,18 +64,19 @@ class VideoPlayerContainer extends Component<Props> {
 
   handleSeeking = () => {
     this.setState({
-      loading: true,
+      loading: true
     });
   };
 
   handleSeeked = () => {
     this.setState({
-      loading: false,
+      loading: false
     });
   };
 
   handleVolumeChange = e => {
-    this.video.volume = e.target.value;
+    console.log(e.target.value);
+    this.volume = e.target.value;
   };
 
   handleVolumeMuted = e => {

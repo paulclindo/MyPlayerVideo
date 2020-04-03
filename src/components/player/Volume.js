@@ -1,7 +1,7 @@
-import React from 'react';
-import styled from 'styled-components';
-import VolumeIcon from '../assets/VolumeIcon';
-
+import React from "react";
+import styled from "styled-components";
+import VolumeIcon from "../assets/VolumeIcon";
+import { IoMdVolumeHigh } from "react-icons/io";
 const Button = styled.button`
   display: flex;
   align-items: center;
@@ -30,7 +30,7 @@ const Button = styled.button`
     border: 1px solid gray;
   }
 
-  .Volume:hover .Volume-range {
+  &:hover .Volume-range {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -38,13 +38,13 @@ const Button = styled.button`
 `;
 type Props = {|
   handleClick: Function,
-  handleVolumeChange: Function,
+  handleVolumeChange: Function
 |};
 function Volume(props: Props) {
   const { handleClick, handleVolumeChange } = props;
   return (
     <Button type="button" onClick={handleClick}>
-      <VolumeIcon color="white" size={25} />
+      <IoMdVolumeHigh color="white" size={25} />
       <div className="Volume-range">
         <input
           type="range"

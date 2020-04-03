@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   IoMdHome,
   IoIosTrendingUp,
@@ -7,69 +7,69 @@ import {
   IoIosRefresh,
   IoIosTimer,
   IoIosThumbsUp,
-  IoIosMenu,
-} from 'react-icons/io';
-import { styled } from 'styled-components';
-import { SidebarWrapper, Nav, HeaderLogo } from './style';
+  IoIosMenu
+} from "react-icons/io";
+import { styled } from "styled-components";
+import { SidebarWrapper, Nav, HeaderLogo, Link } from "./style";
 
 export default function Sidebar(props) {
-  const [collapsed, setCollapsed] = React.useState(false);
-
+  const { toggle, onClick } = props;
+  const handleToggle = () => {
+    onClick();
+  };
   return (
-    <SidebarWrapper style={{ width: collapsed ? '100px' : 'auto' }}>
-      <HeaderLogo>
-        <div>
-          <IoIosMenu onClick={() => setCollapsed(!collapsed)} size={30} />
-        </div>
+    <SidebarWrapper collapsed={toggle}>
+      <HeaderLogo collapsed={toggle}>
+        <IoIosMenu onClick={handleToggle} size={30} />
         <p>🚀 pcYoutube</p>
       </HeaderLogo>
-      <Nav>
+      <Nav collapsed={toggle}>
         <li>
-          <a href="#">
-            <IoMdHome size={25} /> Home
-          </a>
+          <Link collapsed={toggle} href="#">
+            <IoMdHome size={25} /> <span>Home</span>
+          </Link>
         </li>
         <li>
-          <a href="#">
+          <Link collapsed={toggle} href="#">
             <IoIosTrendingUp size={25} />
-            Trending
-          </a>
+            <span>Trending</span>
+          </Link>
         </li>
         <li>
-          <a href="#">
+          <Link collapsed={toggle} href="#">
             <IoIosHeart size={25} />
-            Suscriptions
-          </a>
+            <span>Suscriptions</span>
+          </Link>
         </li>
         <li>
-          <a href="#">
+          <Link collapsed={toggle} href="#">
             <IoMdListBox size={25} />
-            Library
-          </a>
+            <span>Library</span>
+          </Link>
         </li>
         <li>
-          <a href="#">
+          <Link collapsed={toggle} href="#">
             <IoIosRefresh size={25} />
-            History
-          </a>
+            <span>History</span>
+          </Link>
         </li>
         <li>
-          <a href="#">
+          <Link collapsed={toggle} href="#">
             <IoMdHome size={25} />
-            Your Videos
-          </a>
+            <span>Your Videos</span>
+          </Link>
         </li>
         <li>
-          <a href="#">
+          <Link collapsed={toggle} href="#">
             <IoIosTimer size={25} />
-            Watch Later
-          </a>
+            <span>Watch Later</span>
+          </Link>
         </li>
         <li>
-          <a href="#">
+          <Link collapsed={toggle} href="#">
             <IoIosThumbsUp size={25} />
-            Liked Videos
-          </a>
+            <span>Liked Videos</span>
+          </Link>
         </li>
       </Nav>
     </SidebarWrapper>

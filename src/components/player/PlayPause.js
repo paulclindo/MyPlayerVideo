@@ -1,7 +1,8 @@
-import styled from 'styled-components';
-import React from 'react';
-import PlayIcon from '../assets/PlayIcon';
-import PauseIcon from '../assets/PauseIcon';
+import styled from "styled-components";
+import React from "react";
+import PlayIcon from "../assets/PlayIcon";
+import PauseIcon from "../assets/PauseIcon";
+import { IoIosPlay, IoIosPause } from "react-icons/io";
 
 const Wrapper = styled.div`
   width: 50px;
@@ -22,25 +23,20 @@ const Wrapper = styled.div`
 
 type Props = {|
   +pause: boolean,
-  handleClick: Function,
+  handleClick: Function
 |};
 
 const PlayPause = (props: Props) => {
-  const Naming = name => {
-    const neww = `${name}Goool`;
-    const newarr = neww.length;
-    return newarr;
-  };
   const { pause, handleClick } = props;
   return (
     <Wrapper>
       {pause ? (
         <button type="button" onClick={handleClick}>
-          <PlayIcon size={25} color="white" />
+          <IoIosPlay size={25} color="white" />
         </button>
       ) : (
         <button type="button" onClick={handleClick}>
-          <PauseIcon size={25} color="white" />
+          <IoIosPause size={25} color="white" />
         </button>
       )}
     </Wrapper>

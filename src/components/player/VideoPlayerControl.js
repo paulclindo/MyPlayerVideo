@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const Wrapper = styled.div`
   display: flex;
@@ -14,10 +14,10 @@ const Wrapper = styled.div`
 `;
 
 type Props = {|
-  children: React.Node,
+  children: React.Node
 |};
 function VideoPlayerControls(props: Props) {
   const { children } = props;
-  return <Wrapper className="VideoPlayerControls">{children}</Wrapper>;
+  return <Wrapper>{children}</Wrapper>;
 }
 export default VideoPlayerControls;

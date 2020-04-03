@@ -1,12 +1,12 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css?family=Baloo+Da+2:400,600,700&display=swap');
-  /* @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap'); */
+  @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap');
 
   html {
     box-sizing: border-box;
-    font-family: 'Baloo Da 2';
+    font-family: ${props => props.theme.fonts[0]};
   }
 
   *, *:after, *:before{

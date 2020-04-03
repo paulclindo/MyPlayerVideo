@@ -1,12 +1,15 @@
-/* eslint-disable */
-import React, { Component } from 'react';
-import styled from 'styled-components';
+import React, { Component } from "react";
+import styled from "styled-components";
 
 const Wrapper = styled.div`
   width: inherit;
+  height: 0;
+  position: relative;
+  padding-bottom: 52.25%;
   video {
-    width: inherit;
-    vertical-align: middle;
+    position: absolute;
+    width: 100%;
+    height: 100%;
   }
 `;
 
@@ -18,7 +21,7 @@ type Props = {|
   handleSeeked: any,
   autoplay: boolean,
   src: string,
-  muted: boolean,
+  muted: boolean
 |};
 
 class Video extends Component<Props> {
@@ -50,10 +53,10 @@ class Video extends Component<Props> {
       handleSeeked,
       autoplay,
       src,
-      muted,
+      muted
     } = this.props;
     return (
-      <Wrapper className="Video">
+      <Wrapper>
         <video
           autoPlay={autoplay}
           src={src}
