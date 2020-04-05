@@ -9,14 +9,14 @@ module.exports = merge(common, {
   mode: "development",
   output: {
     filename: "[name].bundle.js",
-    path: path.resolve(__dirname, "dev")
+    path: path.resolve(__dirname, "dev"),
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: "./public/home.html",
       filename: "index.html",
-      chunks: ["home"]
-    })
+      chunks: ["home"],
+    }),
   ],
-  devtool: "eval-source-map"
+  devtool: "eval-source-map",
 });

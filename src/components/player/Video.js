@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useEffect, useRef } from "react";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -21,54 +21,60 @@ type Props = {|
   handleSeeked: any,
   autoplay: boolean,
   src: string,
-  muted: boolean
+  muted: boolean,
 |};
 
-class Video extends Component<Props> {
-  componentWillReceiveProps(nextProps) {
-    const { pause } = this.props;
-    if (nextProps.pause !== pause) {
-      this.toggleplay();
-    }
-  }
+// class Video extends Component<Props> {
+const Video = (props: Props) => {
+  const videoRef = useRef(null);
+  useEffect(() => {
+    toggleplay();
+    console.log(props.pause);
+  }, [props.pause]);
 
-  setRef = element => {
-    this.video = element;
+  // componentWillReceiveProps(nextProps) {
+  //   const { pause } = this.props;
+  //   if (nextProps.pause !== pause) {
+  //     this.toggleplay();
+  //   }
+  // }
+
+  // setRef = element => {
+  //   this.video = element;
+  // };
+
+  const toggleplay = () => {
+    const { pause } = props;
+    if (pause) {
+      videoRef.current.play();
+    } else {
+      videoRef.current.pause();
+    }
   };
 
-  toggleplay() {
-    const { pause } = this.props;
-    if (pause) {
-      this.video.play();
-    } else {
-      this.video.pause();
-    }
-  }
+  const {
+    handleLoadedMetada,
+    handleTimeUpdate,
+    handleSeeking,
+    handleSeeked,
+    autoplay,
+    src,
+    muted,
+  } = props;
 
-  render() {
-    const {
-      handleLoadedMetada,
-      handleTimeUpdate,
-      handleSeeking,
-      handleSeeked,
-      autoplay,
-      src,
-      muted
-    } = this.props;
-    return (
-      <Wrapper>
-        <video
-          autoPlay={autoplay}
-          src={src}
-          ref={this.setRef}
-          onLoadedMetadata={handleLoadedMetada}
-          onTimeUpdate={handleTimeUpdate}
-          onSeeking={handleSeeking}
-          onSeeked={handleSeeked}
-          muted={muted}
-        />
-      </Wrapper>
-    );
-  }
-}
+  return (
+    <Wrapper>
+      <video
+        autoPlay={autoplay}
+        src={src}
+        ref={videoRef}
+        onLoadedMetadata={handleLoadedMetada}
+        onTimeUpdate={handleTimeUpdate}
+        onSeeking={handleSeeking}
+        onSeeked={handleSeeked}
+        muted={muted}
+      />
+    </Wrapper>
+  );
+};
 export default Video;

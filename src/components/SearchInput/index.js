@@ -1,20 +1,23 @@
-import React from 'react';
-import { SearchWrapper, SearchInput, StyledSearchIcon } from './style';
+import React from "react";
+import { SearchWrapper, SearchInput, StyledSearchIcon } from "./style";
 
 const SearchBar = () => {
-  const [value, setValue] = React.useState('');
+  const [value, setValue] = React.useState("");
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e.target.value, 'submit');
+    const newvalue = transformText(value);
+    console.log(newvalue, "submit");
   };
 
-  const setRef = React.useRef();
+  const transformText = (string) => string.replace(" ", "-");
+  // const setRef = React.useRef();
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     // this.setState({
     //   value: e.target.value.replace(" ", "-")
     // });
+    console.log(e.target.value);
     setValue(e.target.value);
   };
 
@@ -22,7 +25,7 @@ const SearchBar = () => {
     <SearchWrapper onSubmit={handleSubmit}>
       <StyledSearchIcon size={20} />
       <SearchInput
-        ref={setRef}
+        // ref={setRef}
         type="text"
         placeholder="Look for your favorite video ..."
         onChange={handleChange}

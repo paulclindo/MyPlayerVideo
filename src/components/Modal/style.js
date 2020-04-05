@@ -25,11 +25,5 @@ export const CloseButton = styled(IoIosClose)`
   border-radius: 50%;
   border: none;
   cursor: pointer;
-  color: ${props => props.theme.colors.white};
-
-  /* &:after { */
-  /* content: "X";
-    font-weight: bold;
-    font-size: 30px; */
-  /* } */
+  color: ${(props) => props.theme.colors.white};
 `;
