@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { Component } from "react";
 import VideoPlayerLayout from "../components/player/VideoPlayerLayout";
 import Video from "../components/player/Video";
 import Title from "../components/player/Title";
@@ -17,126 +17,151 @@ type Props = {|
   src: string,
 |};
 
-// class VideoPlayerContainer extends Component<Props> {
-const VideoPlayerContainer = (props: Props) => {
-  const video = useRef();
-  const [pause, setPause] = useState(false);
-  const [duration, setDuration] = useState(0);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [loading, setLoading] = useState(false);
-  const [muted, setMuted] = useState(false);
-
-  useEffect(() => {
-    setPause(!props.autoplay);
-    video.current = value;
-  }, [props.autoplay]);
-  // state = {
-  //   pause: true,
-  //   duration: 0,
-  //   currentTime: 0,
-  //   loading: false,
-  //   muted: false
-  // };
-
-  // componentDidMount() {
-  //   this.setState({
-  //     pause: !this.props.autoplay
-  //   });
-  // }
-
-  const togglePlay = () => {
-    setPause(!pause);
+class VideoPlayerContainer extends Component<Props> {
+  state = {
+    pause: true,
+    duration: 0,
+    currentTime: 0,
+    loading: false,
+    muted: false,
+    lastVolume: 1,
+    VolumeLevel: 1,
+    fullscreen: false,
   };
 
-  const toggleMuted = () => {
-    setMuted(!muted);
+  componentDidMount() {
+    this.setState({
+      pause: !this.props.autoplay,
+    });
+  }
+
+  togglePlay = () => {
+    this.setState({
+      pause: !this.state.pause,
+    });
   };
 
-  const handleLoadedMetada = (e) => {
-    var video = e.target;
-    console.log({ video });
-    setDuration(video.duration);
+  toggleMuted = () => {
+    console.log(this.video.volume, "volumen");
+    this.setState({
+      muted: !this.state.muted,
+      lastVolume: this.video.volume,
+    });
+    this.video.volume = this.state.muted ? this.state.lastVolume : 0;
+    this.setState({
+      VolumeLevel: this.video.volume,
+    });
   };
 
-  const handleTimeUpdate = (e) => {
-    console.log(video);
-    // const video = e.target;
-    setCurrentTime(video.currentTime);
-    // this.setState({
-    //   currentTime: this.video.currentTime,
-    // });
+  handleLoadedMetada = (e) => {
+    this.video = e.target;
+    this.setState({
+      duration: this.video.duration,
+      loading: false,
+    });
   };
 
-  const handleProgressChange = (e) => {
-    video.currentTime = e.target.value;
-    // video.currentTime =
-    // console.log(this.video);
+  handleTimeUpdate = () => {
+    this.setState({
+      currentTime: this.video.currentTime,
+    });
   };
 
-  const handleSeeking = () => {
-    setLoading(true);
-    // this.setState({
-    //   loading: true,
-    // });
+  handleProgressChange = (e) => {
+    this.video.currentTime = e.target.value;
+    console.log(this.video);
   };
 
-  const handleSeeked = () => {
-    setLoading(false);
+  handleSeeking = () => {
+    this.setState({
+      loading: true,
+    });
+  };
+  onLoadStart = () => {
+    this.setState({
+      loading: true,
+    });
+  };
+  onLoadedData = () => {
+    this.setState({
+      loading: false,
+    });
   };
 
-  const handleVolumeChange = (e) => {
-    // console.log(e.target.value);
-    // this.volume = e.target.value;
+  handleSeeked = () => {
+    this.setState({
+      loading: false,
+    });
   };
 
-  const handleVolumeMuted = (e) => {
-    video.muted = e.target.value;
+  handleVolumeChange = (e) => {
+    console.log(e.target.value);
+    this.volume = e.target.value;
   };
 
-  const handleFullScreenClick = () => {
+  handleVolumeMuted = (e) => {
+    this.video.muted = e.target.value;
+  };
+
+  handleFullScreenClick = () => {
     if (!document.webkitIsFullScreen) {
-      video.webkitRequestFullScreen();
+      this.player.webkitRequestFullScreen();
+      this.setState({ fullscreen: true });
     } else {
       document.webkitExitFullscreen();
+      this.setState({ fullscreen: false });
     }
   };
 
-  const { title, autoplay, src } = props;
-  // const { pause, duration, currentTime, loading, muted } = this.state;
-  return (
-    <VideoPlayerLayout setRef={videoRef}>
-      <Title title={title} />
+  setRef = (element) => {
+    this.player = element;
+  };
 
-      <VideoPlayerControl>
-        <PlayPause pause={pause} handleClick={togglePlay} />
-        <Timer
-          duration={formattedTime(duration)}
-          currentTime={formattedTime(currentTime)}
+  render() {
+    const { title, autoplay, src } = this.props;
+    const { pause, duration, currentTime, loading, muted } = this.state;
+    return (
+      <VideoPlayerLayout setRef={this.setRef}>
+        <Title title={title} />
+
+        <VideoPlayerControl>
+          <PlayPause pause={pause} handleClick={this.togglePlay} />
+          <Timer
+            duration={formattedTime(duration)}
+            currentTime={formattedTime(currentTime)}
+          />
+          <ProgressBar
+            duration={duration}
+            value={currentTime}
+            handleProgressChange={this.handleProgressChange}
+          />
+          <Volume
+            muted={muted}
+            handleVolumeChange={this.handleVolumeChange}
+            handleClick={this.toggleMuted}
+            volumeLevel={this.state.VolumeLevel}
+          />
+          <FullScreen
+            fullscreen={this.state.fullscreen}
+            handleFullScreenClick={this.handleFullScreenClick}
+          />
+        </VideoPlayerControl>
+        <Spinner active={loading} />
+        <Video
+          pause={pause}
+          muted={muted}
+          autoplay={autoplay}
+          onLoadStart={this.onLoadStart}
+          onLoadedData={this.onLoadedData}
+          handleLoadedMetada={this.handleLoadedMetada}
+          handleTimeUpdate={this.handleTimeUpdate}
+          handleSeeked={this.handleSeeked}
+          handleSeeking={this.handleSeeking}
+          src={src}
         />
-        <ProgressBar
-          duration={duration}
-          value={currentTime}
-          handleProgressChange={handleProgressChange}
-        />
-        <Volume
-          handleVolumeChange={handleVolumeChange}
-          handleClick={toggleMuted}
-        />
-        <FullScreen handleFullScreenClick={handleFullScreenClick} />
-      </VideoPlayerControl>
-      <Spinner active={loading} />
-      <Video
-        pause={pause}
-        muted={muted}
-        autoplay={autoplay}
-        handleLoadedMetada={handleLoadedMetada}
-        handleTimeUpdate={handleTimeUpdate}
-        handleSeeked={handleSeeked}
-        handleSeeking={handleSeeking}
-        src={src}
-      />
-    </VideoPlayerLayout>
-  );
-};
+      </VideoPlayerLayout>
+    );
+  }
+}
 
 export default VideoPlayerContainer;

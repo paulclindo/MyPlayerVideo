@@ -9,7 +9,7 @@ const Wrapper = styled.div`
   video {
     position: absolute;
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
   }
 `;
 
@@ -24,28 +24,15 @@ type Props = {|
   muted: boolean,
 |};
 
-// class Video extends Component<Props> {
 const Video = (props: Props) => {
   const videoRef = useRef(null);
   useEffect(() => {
     toggleplay();
-    console.log(props.pause);
   }, [props.pause]);
-
-  // componentWillReceiveProps(nextProps) {
-  //   const { pause } = this.props;
-  //   if (nextProps.pause !== pause) {
-  //     this.toggleplay();
-  //   }
-  // }
-
-  // setRef = element => {
-  //   this.video = element;
-  // };
 
   const toggleplay = () => {
     const { pause } = props;
-    if (pause) {
+    if (!pause) {
       videoRef.current.play();
     } else {
       videoRef.current.pause();
@@ -57,6 +44,8 @@ const Video = (props: Props) => {
     handleTimeUpdate,
     handleSeeking,
     handleSeeked,
+    onLoadStart,
+    onLoadedData,
     autoplay,
     src,
     muted,
@@ -68,6 +57,8 @@ const Video = (props: Props) => {
         autoPlay={autoplay}
         src={src}
         ref={videoRef}
+        onLoadStart={onLoadStart}
+        onLoadedData={onLoadedData}
         onLoadedMetadata={handleLoadedMetada}
         onTimeUpdate={handleTimeUpdate}
         onSeeking={handleSeeking}

@@ -1,10 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import FullScreenIcon from "../assets/FullScreenIcon";
-import { IoIosExpand } from "react-icons/io";
+import { IoIosExpand, IoIosContract } from "react-icons/io";
 
 const Wrapper = styled.div`
-  /*border: 1px solid red;*/
   align-items: center;
   display: flex;
   padding: 0 10px;
@@ -12,11 +11,11 @@ const Wrapper = styled.div`
 `;
 
 type Props = {|
-  handleFullScreenClick: Function
+  handleFullScreenClick: Function,
 |};
 
 const FullScreen = (props: Props) => {
-  const { handleFullScreenClick } = props;
+  const { fullscreen, handleFullScreenClick } = props;
   return (
     <Wrapper
       className="FullScreen"
@@ -25,7 +24,11 @@ const FullScreen = (props: Props) => {
       onClick={handleFullScreenClick}
       onKeyDown={handleFullScreenClick}
     >
-      <IoIosExpand size={25} color="white" />
+      {fullscreen ? (
+        <IoIosContract size={25} color="white" />
+      ) : (
+        <IoIosExpand size={25} color="white" />
+      )}
     </Wrapper>
   );
 };

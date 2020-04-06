@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import VolumeIcon from "../assets/VolumeIcon";
-import { IoMdVolumeHigh } from "react-icons/io";
+import { IoMdVolumeHigh, IoIosVolumeOff } from "react-icons/io";
 const Button = styled.button`
   display: flex;
   align-items: center;
@@ -38,17 +38,22 @@ const Button = styled.button`
 `;
 type Props = {|
   handleClick: Function,
-  handleVolumeChange: Function
+  handleVolumeChange: Function,
 |};
 function Volume(props: Props) {
-  const { handleClick, handleVolumeChange } = props;
+  const { muted, handleClick, handleVolumeChange, volumeLevel } = props;
   return (
     <Button type="button" onClick={handleClick}>
-      <IoMdVolumeHigh color="white" size={25} />
+      {muted ? (
+        <IoIosVolumeOff color="white" size={25} />
+      ) : (
+        <IoMdVolumeHigh color="white" size={25} />
+      )}
       <div className="Volume-range">
         <input
           type="range"
           min={0}
+          value={volumeLevel}
           max={1}
           step={0.05}
           onChange={handleVolumeChange}
